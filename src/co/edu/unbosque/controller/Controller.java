@@ -1,7 +1,7 @@
 package co.edu.unbosque.controller;
 
 import co.edu.unbosque.view.VistaConsola;
-import java.net.PasswordAuthentication;
+import javax.mail.PasswordAuthentication;
 import java.util.Properties;
 import java.util.Scanner;
 import javax.mail.*;
@@ -10,51 +10,49 @@ import javax.mail.internet.MimeMessage;
 
 public class Controller {
 
-  private Scanner scanner;
-  private VistaConsola vista;
+	private Scanner scanner;
+	private VistaConsola vista;
 
-  public Controller() {
-    scanner = new Scanner(System.in);
-    vista = new VistaConsola();
-  }
+	public Controller() {
+		start();
+	}
 
-  public void start() {
-    // Configuración de las propiedades para la conexión SMTP de Gmail
-    Properties props = new Properties();
-    props.put("mail.smtp.auth", "true");
-    props.put("mail.smtp.starttls.enable", "true");
-    props.put("mail.smtp.host", "smtp.gmail.com");
-    props.put("mail.smtp.port", "587");
+	public void start() {
+		String host = "smtp.gmail.com";
+		final String user = "buseche@unbosque.edu.co";// change accordingly
+		final String password = "3l3c7r0ph0n320134dm1N";// change accordingly
 
-    // Credenciales de la cuenta de Gmail
-    final String username = "tu_correo@gmail.com";
-    final String password = "tu_contraseña";
+		String to = "ssmora@unbosque.edu.co";// change accordingly
 
-    // Creación de la sesión de correo electrónico
-    Session session = Session.getInstance(props);
+		// Get the session object
+		Properties props = new Properties();
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
 
-    try {
-      // Creación del mensaje de correo electrónico
-      Message message = new MimeMessage(session);
-      message.setFrom(new InternetAddress(username));
-      message.setRecipients(
-        Message.RecipientType.TO,
-        InternetAddress.parse("destinatario@example.com")
-      );
-      message.setSubject("Asunto del correo");
-      message.setText("Contenido del correo");
+		Session session = Session.getDefaultInstance(props, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(user, password);
+			}
+		});
 
-      // Autenticación y envío del mensaje
-      Transport transport = session.getTransport("smtp");
-      transport.connect("smtp.gmail.com", username, password);
-      transport.sendMessage(message, message.getAllRecipients());
-      transport.close();
+		// Compose the message
+		try {
+			
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(user));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			message.setSubject("javatpoint");
+			message.setText("This is simple program of sending email using JavaMail API");
+			
 
-      System.out.println("Correo electrónico enviado correctamente.");
-    } catch (MessagingException e) {
-      System.out.println(
-        "Error al enviar el correo electrónico: " + e.getMessage()
-      );
-    }
-  }
+			// send the message
+			Transport.send(message);
+			System.out.println("message sent successfully...");
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
+	}
 }

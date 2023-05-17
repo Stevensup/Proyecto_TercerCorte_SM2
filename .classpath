@@ -6,15 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mail">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/brayan.useche/Downloads/javax.mail.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/brayan.useche/OneDrive - Aranda Software Corp/Documentos/JAVA/Proyecto_TercerCorte_SM2/libreria/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/brayan.useche/OneDrive - Aranda Software Corp/Documentos/JAVA/Proyecto_TercerCorte_SM2/libreria/javax.mail-1.6.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
