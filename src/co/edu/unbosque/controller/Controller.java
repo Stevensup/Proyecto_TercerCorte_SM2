@@ -22,7 +22,7 @@ public class Controller {
 		final String user = "buseche@unbosque.edu.co";// change accordingly
 		final String password = "3l3c7r0ph0n320134dm1N";// change accordingly
 
-		String to = "ssmora@unbosque.edu.co";// change accordingly
+		String to = "smeloro@unbosque.edu.co";// change accordingly
 
 		// Get the session object
 		Properties props = new Properties();
@@ -42,8 +42,8 @@ public class Controller {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(user));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			message.setSubject("javatpoint");
-			message.setText("This is simple program of sending email using JavaMail API");
+			message.setSubject("PRUEBA CORREO");
+			message.setText("REAL MADRID TU PAPA!");
 			
 
 			// send the message
