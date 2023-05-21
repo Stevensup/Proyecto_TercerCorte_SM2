@@ -99,13 +99,14 @@ public class Controller implements ActionListener {
 		resad.getCancelar().setActionCommand("CANCELAR");
 
 		edit.getCancelar().addActionListener(this);
-		edit.getCancelar().setActionCommand("CANCELAR");
+		edit.getCancelar().setActionCommand("ATRAS");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String codigo = e.getActionCommand();
 
+		System.out.println(codigo);
 		switch (codigo) {
 
 		case "RegisNuevoEstudiante": {
@@ -124,6 +125,7 @@ public class Controller implements ActionListener {
 			vp.setVisible(false);
 			visualizarEstudiante();
 			admi.setVisible(true);
+			nombrar();
 			break;
 		}
 
@@ -177,8 +179,33 @@ public class Controller implements ActionListener {
 			vp.setVisible(true);
 			break;
 		}
-
+		case "ATRAS": {
+			edit.setVisible(false);
+			break;
+		}
 		
+		
+		default: {
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			int state = 0;
+			// nombrar();
+			for (int i = 0; i < usdao.getLista().size(); i++) {
+				if (codigo.equals("num" + i)) {
+					edit.getNombre().setText(usdao.getLista().get(i).getName());
+					edit.getLastname().setText(usdao.getLista().get(i).getLastname());
+					edit.getId().setText(usdao.getLista().get(i).getId());
+					edit.getLugar().setText(usdao.getLista().get(i).getOrigin());
+					edit.getNacimiento().setText(formato.format(usdao.getLista().get(i).getBirthdate()));
+					edit.getPrograma().setText(usdao.getLista().get(i).getCareer());
+					edit.getCorreo().setText(usdao.getLista().get(i).getAlternativemail());
+					edit.getUsuario().setText(usdao.getLista().get(i).getUser());
+					state = (usdao.getLista().get(i).isState()) ? 1 : 2;
+				}
+			}
+			edit.componentes(state);
+			edit.setVisible(true);
+		}
+
 		}
 
 	}
