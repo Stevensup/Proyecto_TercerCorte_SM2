@@ -1,7 +1,7 @@
 package co.edu.unbosque.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import co.edu.unbosque.model.persistance.FileHandler;
 
@@ -9,7 +9,11 @@ public class AdministradorDAO implements OperacionesDAO {
 	private ArrayList<AdministradorDTO> lista;
 
 	public AdministradorDAO() {
-		// TODO Auto-generated constructor stub
+		try {
+			lista = loadFromFile();
+		} catch (Exception e) {
+			lista = new ArrayList<>();
+		}
 	}
 
 	public ArrayList<AdministradorDTO> getLista() {
@@ -22,7 +26,6 @@ public class AdministradorDAO implements OperacionesDAO {
 
 	@Override
 	public void add(Object o) {
-		// TODO Auto-generated method stub
 		lista.add((AdministradorDTO) o);
 	}
 
@@ -30,7 +33,6 @@ public class AdministradorDAO implements OperacionesDAO {
 	public boolean update(int index, Object o) {
 		try {
 			lista.set(index, (AdministradorDTO) o);
-			writeOnFile();
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -42,7 +44,6 @@ public class AdministradorDAO implements OperacionesDAO {
 	public boolean delete(int index) {
 		try {
 			lista.remove(index);
-			writeOnFile();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -59,9 +60,10 @@ public class AdministradorDAO implements OperacionesDAO {
 		return sb.toString();
 	}
 
-	public ArrayList<PersonaDTO> loadFromFile() {
-		ArrayList<PersonaDTO> from_file = new ArrayList<>();
-		String contenido = FileHandler.openFileTxt("datosEst.csv");
+	public ArrayList<AdministradorDTO> loadFromFile() {
+		ArrayList<AdministradorDTO> from_file = new ArrayList<>();
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		String contenido = FileHandler.abrirArchivoDeTexto("Admi.txt");
 		String[] lineas = contenido.split("\n");
 		for (String linea : lineas) {
 			String[] attrs = linea.split(";");
@@ -71,33 +73,9 @@ public class AdministradorDAO implements OperacionesDAO {
 			String gender = attrs[3];
 			String user = attrs[4];
 			String alternativemail = attrs[5];
-			Date birthdate = attrs[6];
 			String password = attrs[7];
-			from_file.add(new AdministradorDTO(id, name, lastname, gender, user, alternativemail, birthdate, password));
+			from_file.add(new AdministradorDTO(id, name, lastname, gender, user, alternativemail, password));
 		}
 		return from_file;
-	}
-
-	public void writeOnFile() {
-		StringBuilder sb = new StringBuilder("");
-		int index = lista.size();
-		for (AdministradorDTO v : lista) {
-			sb.append(v.getId() + ";");
-			sb.append(v.getName() + ";");
-			sb.append(v.getLastname() + ";");
-			sb.append(v.getGender() + ";");
-			sb.append(v.getUser() + ";");
-			sb.append(v.getAlternativemail() + ";");
-			sb.append(v.getBirthdate() + ";");
-			sb.append(v.getPassword() + ";");
-
-			if (index == 1) {
-				continue;
-			} else {
-				index--;
-				sb.append("\n");
-			}
-		}
-		FileHandler.writeFileTxt("datosEst.csv", sb.toString());
 	}
 }
