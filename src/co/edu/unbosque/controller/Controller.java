@@ -1,63 +1,3 @@
-<<<<<<< HEAD
-package co.edu.unbosque.controller;
-
-import co.edu.unbosque.view.VistaConsola;
-import javax.mail.PasswordAuthentication;
-import java.util.Properties;
-import java.util.Scanner;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-public class Controller {
-
-	private Scanner scanner;
-	private VistaConsola vista;
-
-	public Controller() {
-		start();
-	}
-
-	public void start() {
-		String host = "smtp.gmail.com";
-		final String user = "buseche@unbosque.edu.co";// change accordingly
-		final String password = "3l3c7r0ph0n320134dm1N";// change accordingly
-
-		String to = "smeloro@unbosque.edu.co";// change accordingly
-
-		// Get the session object
-		Properties props = new Properties();
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-
-		Session session = Session.getDefaultInstance(props, new Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(user, password);
-			}
-		});
-
-		// Compose the message
-		try {
-			
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(user));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			message.setSubject("PRUEBA CORREO");
-			message.setText("REAL MADRID TU PAPA!");
-			
-
-			// send the message
-			Transport.send(message);
-			System.out.println("message sent successfully...");
-
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-
-	}
-}
-=======
 /**
  * 
  */
@@ -78,6 +18,7 @@ import co.edu.unbosque.model.UsuarioDAO;
 import co.edu.unbosque.model.UsuarioDTO;
 import co.edu.unbosque.model.persistance.FileHandler;
 import co.edu.unbosque.view.Administrador;
+import co.edu.unbosque.view.Editar;
 import co.edu.unbosque.view.RegistrarAd;
 import co.edu.unbosque.view.RegistrarEs;
 import co.edu.unbosque.view.VentanaPrincipal;
@@ -92,6 +33,7 @@ public class Controller implements ActionListener {
 	private RegistrarAd resad;
 	private RegistrarEs reses;
 	private Administrador admi;
+	private Editar edit;
 
 	private UsuarioDAO usdao;
 	private AdministradorDAO addao;
@@ -104,6 +46,7 @@ public class Controller implements ActionListener {
 		resad = new RegistrarAd();
 		reses = new RegistrarEs();
 		admi = new Administrador();
+		edit = new Editar();
 
 		usdao = new UsuarioDAO();
 		addao = new AdministradorDAO();
@@ -155,12 +98,15 @@ public class Controller implements ActionListener {
 		resad.getCancelar().addActionListener(this);
 		resad.getCancelar().setActionCommand("CANCELAR");
 
+		edit.getCancelar().addActionListener(this);
+		edit.getCancelar().setActionCommand("CANCELAR");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		String codigo = e.getActionCommand();
 
-		switch (e.getActionCommand()) {
+		switch (codigo) {
 
 		case "RegisNuevoEstudiante": {
 			vp.setVisible(false);
@@ -232,7 +178,9 @@ public class Controller implements ActionListener {
 			break;
 		}
 
+		
 		}
+
 	}
 
 	public void registrarEstudiante() {
@@ -257,12 +205,12 @@ public class Controller implements ActionListener {
 			birthdate = formato.parse(reses.getFecha().getText());
 		} catch (ParseException eee) {
 		}
-		boolean state = codigoVerificacion(email);
+		boolean state = codigoVerificacion(email, name);
 		usdao.add(new UsuarioDTO(id, name, lastname, gender, user, email, birthdate, state, career, time, origen,
 				registro));
 	}
 
-	public boolean codigoVerificacion(String email) {
+	public boolean codigoVerificacion(String email, String name) {
 		Random codigo = new Random();
 		String[] letras = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
 				"S", "T", "U", "V", "W", "X", "Y", "Z" };
@@ -272,7 +220,7 @@ public class Controller implements ActionListener {
 			cod += letras[codigo.nextInt(25)];
 			cod += numeros[codigo.nextInt(10)];
 		}
-		cor.start(email, cod);
+		cor.start(email, cod, name);
 		String verifica = JOptionPane.showInputDialog("Ingrese el codigo de verificacion enviado a su correo");
 		if (cod.equals(verifica)) {
 			return true;
@@ -296,5 +244,11 @@ public class Controller implements ActionListener {
 		admi.componentes(cantidad, docs, apellidos, nombres, usuarios);
 	}
 
+	public void nombrar() {
+		for (int i = 0; i < admi.getEditar().size(); i++) {
+			admi.getEditar().get(i).addActionListener(this);
+			admi.getEditar().get(i).setActionCommand("num" + i);
+		}
+	}
+
 }
->>>>>>> b7594fc7216856957bde540f6552c111510d92e6

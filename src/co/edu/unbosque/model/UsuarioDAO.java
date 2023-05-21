@@ -80,6 +80,17 @@ public class UsuarioDAO implements OperacionesDAO {
 		return sb.toString();
 	}
 
+//	public void mostrarIndividual(int index) {
+//		StringBuilder sb = new StringBuilder("");
+//
+//		for (int i = 0; i < lista.size(); i++) {
+//			if ((lista.get(i).getId()).equals(index + "")) {
+//				sb.append(lista.get(i).toString());
+//			}
+//		}
+//
+//	}
+
 	private ArrayList<UsuarioDTO> cargarEstudiante() {
 		ArrayList<UsuarioDTO> from_file = new ArrayList<>();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");

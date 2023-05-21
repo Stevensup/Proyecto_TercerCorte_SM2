@@ -6,12 +6,14 @@ package co.edu.unbosque.view;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
@@ -25,8 +27,10 @@ public class Administrador extends JFrame {
 	private ArrayList<JPanel> paneles;
 	private ArrayList<JLabel> ndoc, names, lastname, user;
 	private JComboBox<String> ordenar;
+	private JRadioButton acti, inacti, registrado, nacional;
+	private ButtonGroup grupo;
 	private JTextField buscar;
-	private JButton bus;
+	private JButton bus, salir, pdf;
 	private JLabel fondo;
 	private JPanel panelprincipal;
 	private JScrollPane scroll;
@@ -50,21 +54,71 @@ public class Administrador extends JFrame {
 		user = new ArrayList<JLabel>();
 		componentes();
 	}
-	
+
 	public void componentes() {
 		ordenar = new JComboBox<String>();
 		ordenar.setBounds(153, 138, 425, 20);
-		ordenar.addItem("2");
+		ordenar.addItem("↓↑  Ordenar");
+		ordenar.addItem("Documento");
+		ordenar.addItem("Nombre");
+		ordenar.addItem("Apellido");
+		ordenar.addItem("Usuario");
 		this.add(ordenar);
-		
+
 		buscar = new JTextField();
 		buscar.setBounds(580, 138, 300, 20);
 		this.add(buscar);
-		
+
 		bus = new JButton("Buscar");
 		bus.setBounds(881, 138, 100, 20);
 		this.add(bus);
+
+		salir = new JButton();
+		salir.setBounds(23, 540, 100, 50);
+		salir.setBorderPainted(false);
+		salir.setContentAreaFilled(false);
+		this.add(salir);
+
+		pdf = new JButton();
+		pdf.setBounds(23, 469, 100, 50);
+		pdf.setBorderPainted(false);
+		pdf.setContentAreaFilled(false);
+		this.add(pdf);
+
+		acti = new JRadioButton();
+		acti.setBounds(119, 230, 20, 20);
+		acti.setOpaque(false);
+		acti.setBorderPainted(false);
+		acti.setContentAreaFilled(false);
+		this.add(acti);
 		
+		inacti = new JRadioButton();
+		inacti.setBounds(119, 289, 20, 20);
+		inacti.setOpaque(false);
+		inacti.setBorderPainted(false);
+		inacti.setContentAreaFilled(false);
+		this.add(inacti);
+		
+		registrado = new JRadioButton();
+		registrado.setBounds(119, 347, 20, 20);
+		registrado.setOpaque(false);
+		registrado.setBorderPainted(false);
+		registrado.setContentAreaFilled(false);
+		this.add(registrado);
+		
+		nacional = new JRadioButton();
+		nacional.setBounds(119, 406, 20, 20);
+		nacional.setOpaque(false);
+		nacional.setBorderPainted(false);
+		nacional.setContentAreaFilled(false);
+		this.add(nacional);
+		
+		grupo = new ButtonGroup();
+		grupo.add(acti);
+		grupo.add(inacti);
+		grupo.add(registrado);
+		grupo.add(nacional);
+
 	}
 
 	public void componentes(int a, String[] doc, String[] apellidos, String[] nombres, String[] usuario) {
