@@ -1,9 +1,15 @@
 /**
- * 
+ * Esta clase es la encargada de mostrarle al usuario la ventana de edicion de 
+ * un UsuarioDTO con sus respectivos componentes.
  */
 package co.edu.unbosque.view;
 
+import java.awt.Color;
+
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,25 +17,44 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
- * @author annie
+ * @author Codernautas
  *
  */
 public class Editar extends JFrame {
-	private JLabel fondo;
+	private JLabel fondo, identificador;
 	private JTextField nombre, lastname, id, lugar, nacimiento, programa, correo, usuario;
 	private JButton cancelar, eliminar, estado, guardar;
 
+	/**
+	 * Este método constructor crea  una ventana de tipo JFrame y le asigna 
+	 * caracteristicas propias como tamaNo, posición. Ademas de agregar 
+	 * los componentes corrrespondientes.
+	 */
 	public Editar() {
 		this.setSize(800, 450);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setUndecorated(true);
 		this.setLayout(null);
+		Image logo = Toolkit.getDefaultToolkit().createImage("src/co/edu/unbosque/view/resources/logo.png");
+		this.setIconImage(logo);
+
+		fondo = new JLabel();
+		fondo.setBounds(0, 0, 800, 450);
 
 		componentes();
 	}
-
+	
+	/**
+	 * Inicializa cada componente y le asigna caracteristicas especificas
+	 * como ubicacion y color
+	 */
 	public void componentes() {
+		identificador = new JLabel();
+		identificador.setBounds(200, 80, 10, 10);
+		identificador.setForeground(Color.WHITE);
+		add(identificador);
+
 		nombre = new JTextField();
 		nombre.setBounds(272, 82, 135, 22);
 		nombre.setBorder(null);
@@ -77,37 +102,54 @@ public class Editar extends JFrame {
 		usuario.setBorder(null);
 		usuario.setFont(new Font("", Font.BOLD, 15));
 		add(usuario);
-		
+
 		cancelar = new JButton();
 		cancelar.setBounds(60, 353, 110, 43);
 		cancelar.setBorderPainted(false);
 		cancelar.setContentAreaFilled(false);
 		add(cancelar);
-		
+
 		eliminar = new JButton();
 		eliminar.setBounds(218, 353, 110, 43);
 		eliminar.setBorderPainted(false);
 		eliminar.setContentAreaFilled(false);
 		add(eliminar);
-		
+
 		estado = new JButton();
 		estado.setBounds(372, 353, 125, 43);
 		estado.setBorderPainted(false);
 		estado.setContentAreaFilled(false);
 		add(estado);
-		
+
 		guardar = new JButton();
 		guardar.setBounds(540, 353, 202, 43);
 		guardar.setBorderPainted(false);
 		guardar.setContentAreaFilled(false);
 		add(guardar);
 	}
+
+	/**
+	 * Asigna Una imagen de fondo especifica dependiendo del parametro
+	 * a que indica el estado del UsuarioDTO
+	 * @param a
+	 */
 	public void componentes(int a) {
-		fondo = new JLabel();
-		fondo.setBounds(0, 0, 800, 450);
-		fondo.setIcon(new ImageIcon("src/co/edu/unbosque/view/resources/Editar"+a+".png"));
+		fondo.setIcon(new ImageIcon("src/co/edu/unbosque/view/resources/Editar" + a + ".png"));
 		add(fondo);
 	}
+
+	/***
+	 * Permite volver a su estado original algunos elementos de esta clase
+	 */
+	public void reiniciar() {
+		fondo.setIcon(null);
+	}
+	
+	/**
+	 * A continuacion se establecen los get y set de los componentes 
+	 * de esta clase cuya funcion es perminir la manipulacion y edicion
+	 * de las caracteristicas de los componentes
+	 */
 
 	/**
 	 * @return the fondo
@@ -291,7 +333,18 @@ public class Editar extends JFrame {
 		this.guardar = guardar;
 	}
 
-	
-	
+	/**
+	 * @return the identificador
+	 */
+	public JLabel getIdentificador() {
+		return identificador;
+	}
+
+	/**
+	 * @param identificador the identificador to set
+	 */
+	public void setIdentificador(JLabel identificador) {
+		this.identificador = identificador;
+	}
 
 }

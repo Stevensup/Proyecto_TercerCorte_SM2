@@ -1,6 +1,11 @@
 package co.edu.unbosque.model;
 
 import java.util.Date;
+/**
+ * 
+ * @author Codernautas
+ *
+ */
 
 public class AdministradorDTO extends UsuarioDTO {
 	private String password;
@@ -80,7 +85,7 @@ public class AdministradorDTO extends UsuarioDTO {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder(super.toString());
-		sb.append("Contraseña: " + getPassword() + "\n");
+		sb.append("ContraseNa: " + getPassword() + "\n");
 		return sb.toString();
 	}
 }

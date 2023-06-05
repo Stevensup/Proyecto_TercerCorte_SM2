@@ -5,7 +5,7 @@ public interface OperacionesDAO {
 
 	public boolean update(int index, Object o);
 
-	public boolean delete(int index);
+	public boolean delete(String doc);
 
 	public String showAll();
 }

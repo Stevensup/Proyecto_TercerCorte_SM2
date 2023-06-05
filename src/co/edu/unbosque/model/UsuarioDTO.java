@@ -1,8 +1,14 @@
 package co.edu.unbosque.model;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
+/**
+ * 
+ * @author Codernautas
+ *
+ */
 public class UsuarioDTO implements Serializable{
 	
 	/**

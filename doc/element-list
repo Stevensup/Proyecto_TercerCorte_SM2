@@ -1,0 +1,6 @@
+co.edu.unbosque.controller
+co.edu.unbosque.model
+co.edu.unbosque.model.persistance
+co.edu.unbosque.test
+co.edu.unbosque.util.exception
+co.edu.unbosque.view

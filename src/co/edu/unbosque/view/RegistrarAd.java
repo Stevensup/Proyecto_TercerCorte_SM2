@@ -1,8 +1,14 @@
+/**
+ * Esta clase es la encargada de estructurar la ventana de registro de 
+ * un nuevo administrador con sus respectivos componentes.
+ */
 package co.edu.unbosque.view;
 
 import java.awt.Dimension;
+
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -20,17 +26,24 @@ public class RegistrarAd extends JFrame {
 	private JLabel fondo, formulario;
 	private JPanel panel;
 	private JScrollPane scroll;
-	private JTextField nombre, apellido, documento, correo, usuario, contraseña;
+	private JTextField nombre, apellido, documento, correo, usuario, contraseNa;
 	private JButton guardar, cancelar;
 	private JRadioButton m, f;
 	private ButtonGroup grupo;;
 
+	/**
+	 * Este método crea  una ventanade tipo Jframe estableciendo su tamaNo, posición,
+	 * icono. Agrega componentes de interfaz, e inicializa los botones de la misma 
+	 * asignandoles posicion, tamaNo y caracteristicas visuales.
+	 */
 	public RegistrarAd() {
 		this.setSize(1000, 650);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
-
+		Image logo = Toolkit.getDefaultToolkit().createImage("src/co/edu/unbosque/view/resources/logo.png");
+		this.setIconImage(logo);
+		
 		fondo = new JLabel();
 		fondo.setBounds(0, 0, 1000, 650);
 		ImageIcon fond = new ImageIcon("src/co/edu/unbosque/view/resources/Agregar.png");
@@ -53,6 +66,10 @@ public class RegistrarAd extends JFrame {
 		add(fondo);
 	}
 
+	/**
+	 * Este metodo inicializa y asigna caracteristicas visuales a los componentes 
+	 * de esta clase que permiten al usuario interactuar con el programa
+	 */
 	public void componente() {
 
 		panel = new JPanel();
@@ -107,11 +124,11 @@ public class RegistrarAd extends JFrame {
 		usuario.setFont(new Font("", Font.PLAIN, 20));
 		panel.add(usuario);
 
-		contraseña = new JTextField();
-		contraseña.setBounds(542, 924, 390, 33);
-		contraseña.setBorder(null);
-		contraseña.setFont(new Font("", Font.PLAIN, 20));
-		panel.add(contraseña);
+		contraseNa = new JTextField();
+		contraseNa.setBounds(542, 924, 390, 33);
+		contraseNa.setBorder(null);
+		contraseNa.setFont(new Font("", Font.PLAIN, 20));
+		panel.add(contraseNa);
 
 		formulario = new JLabel();
 		formulario.setBounds(0, 0, 970, 1003);
@@ -124,6 +141,12 @@ public class RegistrarAd extends JFrame {
 		scroll.setViewportView(panel);
 		add(scroll);
 	}
+	
+	/**
+	 * A continuacion se establecen los get y set de los componentes 
+	 * de esta clase cuya funcion es perminir la manipulacion y edicion
+	 * de las caracteristicas de los componentes
+	 */
 
 	/**
 	 * @return the fondo
@@ -252,17 +275,17 @@ public class RegistrarAd extends JFrame {
 	}
 
 	/**
-	 * @return the contraseña
+	 * @return the contraseNa
 	 */
-	public JTextField getContraseña() {
-		return contraseña;
+	public JTextField getContraseNa() {
+		return contraseNa;
 	}
 
 	/**
-	 * @param contraseña the contraseña to set
+	 * @param contraseNa the contraseNa to set
 	 */
-	public void setContraseña(JTextField contraseña) {
-		this.contraseña = contraseña;
+	public void setContraseNa(JTextField contraseNa) {
+		this.contraseNa = contraseNa;
 	}
 
 	/**

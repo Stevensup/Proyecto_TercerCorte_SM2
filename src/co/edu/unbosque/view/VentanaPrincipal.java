@@ -1,10 +1,17 @@
 /**
- * 
+ * Esta clase es la encargada de mostrarle al usuario la ventana que 
+ * corresponde al menu principal, donde podra tomar desicion sobre 
+ * cada una de las opciones que tiene como usuario del sistema como
+ * administrar o registrar a los UsuarioDTO y AdministradorDTO.
  */
 package co.edu.unbosque.view;
 
 import java.awt.Font;
+
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URI;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,21 +20,28 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
- * @author annie
+ * @author Codernautas
  *
  */
 public class VentanaPrincipal extends JFrame {
 
-	private JTextField usuario, contraseña;
+	private JTextField usuario, contraseNa;
 	private JButton iniciar, registrarEs, registrarAd;
 	private JLabel fondo;
 
+	/**
+	 * Este método constructor crea  una ventana de tipo JFrame y le asigna 
+	 * caracteristicas propias como tamaNo, posición. Ademas de agregar 
+	 * los componentes corrrespondientes.
+	 */
 	public VentanaPrincipal() {
 		this.setSize(1000, 650);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
-
+		Image logo = Toolkit.getDefaultToolkit().createImage("src/co/edu/unbosque/view/resources/logo.png");
+		this.setIconImage(logo);
+		
 		fondo = new JLabel();
 		fondo.setBounds(0, 0, 1000, 650);
 		ImageIcon fond = new ImageIcon("src/co/edu/unbosque/view/resources/VentanaPrincipal.gif");
@@ -39,8 +53,11 @@ public class VentanaPrincipal extends JFrame {
 
 	}
 
+	/**
+	 * Inicializa todos los componentes pertenecientes a esta clase les asigna una
+	 * posicion y caracteristicas visuales.
+	 */
 	public void componente() {
-
 		iniciar = new JButton();
 		iniciar.setBounds(570, 530, 67, 29);
 		iniciar.setOpaque(false);
@@ -55,12 +72,12 @@ public class VentanaPrincipal extends JFrame {
 		usuario.setFont(new Font("", Font.BOLD, 15));
 		add(usuario);
 
-		contraseña = new JTextField();
-		contraseña.setBounds(438, 488, 193, 26);
-		contraseña.setBorder(null);
-		contraseña.setOpaque(false);
-		contraseña.setFont(new Font("", Font.BOLD, 15));
-		add(contraseña);
+		contraseNa = new JTextField();
+		contraseNa.setBounds(438, 488, 193, 26);
+		contraseNa.setBorder(null);
+		contraseNa.setOpaque(false);
+		contraseNa.setFont(new Font("", Font.BOLD, 15));
+		add(contraseNa);
 
 		registrarEs = new JButton();
 		registrarEs.setBounds(362, 579, 110, 18);
@@ -79,6 +96,12 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	/**
+	 * A continuacion se establecen los get y set de los componentes 
+	 * de esta clase cuya funcion es perminir la manipulacion y edicion
+	 * de las caracteristicas de los componentes
+	 */
+	
+	/**
 	 * @return the usuario
 	 */
 	public JTextField getUsuario() {
@@ -93,17 +116,17 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	/**
-	 * @return the contraseña
+	 * @return the contraseNa
 	 */
-	public JTextField getContraseña() {
-		return contraseña;
+	public JTextField getContraseNa() {
+		return contraseNa;
 	}
 
 	/**
-	 * @param contraseña the contraseña to set
+	 * @param contraseNa the contraseNa to set
 	 */
-	public void setContraseña(JTextField contraseña) {
-		this.contraseña = contraseña;
+	public void setContraseNa(JTextField contraseNa) {
+		this.contraseNa = contraseNa;
 	}
 
 	/**
@@ -147,7 +170,5 @@ public class VentanaPrincipal extends JFrame {
 	public void setRegistrarAd(JButton registrarAd) {
 		this.registrarAd = registrarAd;
 	}
-	
-	
 
 }

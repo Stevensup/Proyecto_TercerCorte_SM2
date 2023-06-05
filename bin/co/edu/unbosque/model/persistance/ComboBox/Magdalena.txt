@@ -13,7 +13,7 @@ Pueblo Viejo
 Zona Bananera
 Cerro San Antonio
 Concordia
-El Piñon
+El PiNon
 Pedraza
 Pivijay
 Remolino
@@ -23,7 +23,7 @@ Zapayan
 Santa Marta
 El Banco
 Guamal
-Pijiño Del Carmen
+PijiNo Del Carmen
 San Sebastian De Buenavista
 San Zenon
 Santa Ana

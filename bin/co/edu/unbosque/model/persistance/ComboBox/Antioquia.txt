@@ -22,7 +22,7 @@ Yalí
 Yolombó
 Angostura
 Belmira
-Briceño
+BriceNo
 Campamento
 Carolina
 Don Matias
@@ -31,7 +31,7 @@ Gómez Plata
 Guadalupe
 Ituango
 San Andrés
-San José De La Montaña
+San José De La MontaNa
 San Pedro
 Santa Rosa De Osos
 Toledo
@@ -41,7 +41,7 @@ Abriaquí
 Anza
 Armenia
 Buriticá
-Cañasgordas
+CaNasgordas
 Dabeiba
 Ebéjico
 Frontino
@@ -67,8 +67,8 @@ Guatape
 La Ceja
 La Unión
 Marinilla
-Nariño
-Peñol
+NariNo
+PeNol
 Retiro
 Rionegro
 San Carlos

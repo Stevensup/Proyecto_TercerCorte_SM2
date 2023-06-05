@@ -5,7 +5,12 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
+import javax.swing.JOptionPane;
+/**
+ * 
+ * @author Codernautas
+ *
+ */
 public class Correo {
 
 	private String host;
@@ -34,7 +39,6 @@ public class Correo {
 
 	//	 Compose the message
 		try {
-
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(user));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
@@ -55,7 +59,7 @@ public class Correo {
 			System.out.println(cod);
 
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "El correo ingresado no es valido");
 		}
 
 	}

@@ -1,10 +1,16 @@
 package co.edu.unbosque.model;
 
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.persistance.FileHandler;
 
+/**
+ * 
+ * @author Codernautas
+ *
+ */
 public class AdministradorDAO implements OperacionesDAO {
 	private ArrayList<AdministradorDTO> lista;
 
@@ -16,10 +22,16 @@ public class AdministradorDAO implements OperacionesDAO {
 		}
 	}
 
+	/**
+	 * @return the lista
+	 */
 	public ArrayList<AdministradorDTO> getLista() {
 		return lista;
 	}
 
+	/**
+	 * @param lista the lista to set
+	 */
 	public void setLista(ArrayList<AdministradorDTO> lista) {
 		this.lista = lista;
 	}
@@ -27,6 +39,7 @@ public class AdministradorDAO implements OperacionesDAO {
 	@Override
 	public void add(Object o) {
 		lista.add((AdministradorDTO) o);
+		writeOnFile();
 	}
 
 	@Override
@@ -41,9 +54,14 @@ public class AdministradorDAO implements OperacionesDAO {
 	}
 
 	@Override
-	public boolean delete(int index) {
+	public boolean delete(String doc) {
 		try {
-			lista.remove(index);
+			for (int i = 0; i < lista.size(); i++) {
+				if (lista.get(i).getId().equals(doc)) {
+					lista.remove(i);
+				} else {
+				}
+			}
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -60,10 +78,15 @@ public class AdministradorDAO implements OperacionesDAO {
 		return sb.toString();
 	}
 
+	/**
+	 * Este metodo se encargar de cargar en un array todas las caracteristicas
+	 * guardadas en persistenacia
+	 * 
+	 * @return
+	 */
 	public ArrayList<AdministradorDTO> loadFromFile() {
 		ArrayList<AdministradorDTO> from_file = new ArrayList<>();
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		String contenido = FileHandler.abrirArchivoDeTexto("Admi.txt");
+		String contenido = FileHandler.abrirArchivoDeTexto("datosAdmi.txt");
 		String[] lineas = contenido.split("\n");
 		for (String linea : lineas) {
 			String[] attrs = linea.split(";");
@@ -73,9 +96,28 @@ public class AdministradorDAO implements OperacionesDAO {
 			String gender = attrs[3];
 			String user = attrs[4];
 			String alternativemail = attrs[5];
-			String password = attrs[7];
+			String password = attrs[6];
 			from_file.add(new AdministradorDTO(id, name, lastname, gender, user, alternativemail, password));
 		}
 		return from_file;
+	}
+
+	/**
+	 * Este metodo se encarga de implmentar el FileHandler para escribir las
+	 * caracteristicas y poder conservar asi la persistencia
+	 */
+	public void writeOnFile() {
+		StringBuilder sb = new StringBuilder("");
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		for (AdministradorDTO v : lista) {
+			sb.append(v.getId() + ";");
+			sb.append(v.getName() + ";");
+			sb.append(v.getLastname() + ";");
+			sb.append(v.getGender() + ";");
+			sb.append(v.getUser() + ";");
+			sb.append(v.getAlternativemail() + ";");
+			sb.append(v.getPassword() + "\n");
+		}
+		FileHandler.escribirArchivoDeTexto("datosAdmi.txt", sb.toString());
 	}
 }

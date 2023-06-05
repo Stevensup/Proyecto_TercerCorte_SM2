@@ -10,7 +10,7 @@ Agua De Dios
 Girardot
 Guataquí
 Jerusalén
-Nariño
+NariNo
 Nilo
 Ricaurte
 Tocaima
@@ -18,7 +18,7 @@ Caparrapí
 Guaduas
 Puerto Salgar
 Albán
-La Peña
+La PeNa
 La Vega
 Nimaima
 Nocaima
@@ -56,7 +56,7 @@ Gutiérrez
 Quetame
 Ubaque
 Une
-El Peñón
+El PeNón
 La Palma
 Pacho
 Paime

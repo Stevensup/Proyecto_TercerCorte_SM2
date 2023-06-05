@@ -1,8 +1,13 @@
+/**
+ * Esta clase es la encargada de estructurar la ventana de registro de 
+ * un estudiante con sus respectivos componentes.
+ */
 package co.edu.unbosque.view;
 
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -28,12 +33,19 @@ public class RegistrarEs extends JFrame {
 	private ButtonGroup grupo;
 	private JComboBox<String> paisNacimiento, departamento, municipio, programa, jornada;
 
+	/**
+	 * Este método crea  una ventana, establece su tamaNo, posición,
+	 * comportamiento de cierre. Agrega componentes de interfaz de 
+	 * usuario, como botones y etiquetas, y los configura con la vista.
+	 */
 	public RegistrarEs() {
 		this.setSize(1000, 650);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
-
+		Image logo = Toolkit.getDefaultToolkit().createImage("src/co/edu/unbosque/view/resources/logo.png");
+		this.setIconImage(logo);
+		
 		fondo = new JLabel();
 		fondo.setBounds(0, 0, 1000, 650);
 		ImageIcon fond = new ImageIcon("src/co/edu/unbosque/view/resources/Agregar.png");
@@ -56,6 +68,12 @@ public class RegistrarEs extends JFrame {
 		add(fondo);
 
 	}
+	/**
+	 * Este método crea y configura varios componentes de la interfaz gráfica
+	 * del usuario, tales como campos de texto,botones de radio, combobox y etiquetas,
+	 * y los coloca en una ventana. El panel se coloca dentro de un JScrollPane para
+	 * determinar el desplazamiento si los componentes exceden el tamaNo del área visible. 
+	 */
 
 	public void componente() {
 
@@ -166,6 +184,13 @@ public class RegistrarEs extends JFrame {
 		scroll.setViewportView(panel);
 		add(scroll);
 	}
+	/**
+	 * Este método se emplea para cargar los paises desde un archivo de 
+	 * texto y los agrega como elementos a un JComboBox, que luego se 
+	 * agrega a la vista.
+	 *  El archivo de texto exista.
+	 *  Se ha cargado todos los paises y se ha agregado al JComboBox.
+	 */
 
 	public void cargarItemPais() {
 		String contenido = FileHandler.abrirArchivoDeTexto("ComboBox/Pais.txt");
@@ -175,6 +200,14 @@ public class RegistrarEs extends JFrame {
 		}
 		panel.add(paisNacimiento);
 	}
+	
+	/**
+	 * Este método se emplea para cargar los departamentos desde un archivo de 
+	 * texto y los agrega como elementos a un JComboBox, que luego se 
+	 * agrega a la vista.
+	 * El archivo de texto exista.
+	 * Se ha cargado todos los departamentos y se ha agregado al JComboBox.
+	 */
 
 	public void cargarItemDepartamento() {
 		String contenido = FileHandler.abrirArchivoDeTexto("ComboBox/Departamento.txt");
@@ -184,6 +217,32 @@ public class RegistrarEs extends JFrame {
 		}
 		panel.add(departamento);
 	}
+
+	/**
+	 * Este método reinicia los valores de los campos de texto y oculta 
+	 * ciertos componentes de la interfaz para reestablecerla a su estado
+	 * inicial.
+	 * Se ha limpiado todos los valores de lo campos de texto.
+	 */
+	public void reiniciar() {
+		nombre.setText("");
+		apellido.setText("");
+		documento.setText("");
+		fecha.setText("");
+		correo.setText("");
+		usuario.setText("");
+		
+		departamento.setVisible(false);
+		municipio.setVisible(false);
+		jornada.setVisible(false);
+
+	}
+	
+	/**
+	 * A continuacion se establecen los get y set de los componentes 
+	 * de esta clase cuya funcion es perminir la manipulacion y edicion
+	 * de las caracteristicas de los componentes
+	 */
 
 	/**
 	 * @return the fondo
@@ -492,7 +551,5 @@ public class RegistrarEs extends JFrame {
 	public void setJornada(JComboBox<String> jornada) {
 		this.jornada = jornada;
 	}
-	
-	
 
 }

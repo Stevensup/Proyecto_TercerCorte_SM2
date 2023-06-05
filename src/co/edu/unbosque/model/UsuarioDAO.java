@@ -4,6 +4,7 @@
 package co.edu.unbosque.model;
 
 import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import java.util.Date;
 import co.edu.unbosque.model.persistance.FileHandler;
 
 /**
- * @author annie
+ * @author Codernautas
  *
  */
 public class UsuarioDAO implements OperacionesDAO {
@@ -20,11 +21,11 @@ public class UsuarioDAO implements OperacionesDAO {
 	private ArrayList<UsuarioDTO> lista;
 
 	public UsuarioDAO() {
-		// try {
-		// lista = cargarEstudiante();
-//		} catch (Exception e) {
-		lista = (ArrayList<UsuarioDTO>) FileHandler.leerSerializado("datosEst.dat");
-		// }
+		try {
+			lista = (ArrayList<UsuarioDTO>) FileHandler.leerSerializado("datosEst.dat");
+		} catch (Exception e) {
+			lista = new ArrayList<>();
+		}
 	}
 
 	/**
@@ -60,9 +61,15 @@ public class UsuarioDAO implements OperacionesDAO {
 	}
 
 	@Override
-	public boolean delete(int index) {
+	public boolean delete(String doc) {
 		try {
-			lista.remove(index);
+
+			for (int i = 0; i < lista.size(); i++) {
+				if (lista.get(i).getId().equals(doc)) {
+					lista.remove(i);
+				} else {
+				}
+			}
 			writeOnFile();
 			return true;
 		} catch (Exception e) {
@@ -80,17 +87,12 @@ public class UsuarioDAO implements OperacionesDAO {
 		return sb.toString();
 	}
 
-//	public void mostrarIndividual(int index) {
-//		StringBuilder sb = new StringBuilder("");
-//
-//		for (int i = 0; i < lista.size(); i++) {
-//			if ((lista.get(i).getId()).equals(index + "")) {
-//				sb.append(lista.get(i).toString());
-//			}
-//		}
-//
-//	}
-
+	/**
+	 * Este metodo se encargar de cargar en un array todas las caracteristicas
+	 * guardadas en persistenacia
+	 * 
+	 * @return
+	 */
 	private ArrayList<UsuarioDTO> cargarEstudiante() {
 		ArrayList<UsuarioDTO> from_file = new ArrayList<>();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -122,6 +124,10 @@ public class UsuarioDAO implements OperacionesDAO {
 		return from_file;
 	}
 
+	/**
+	 * Este metodo se encarga de implmentar el FileHandler para escribir las
+	 * caracteristicas y poder conservar asi la persistencia
+	 */
 	public void writeOnFile() {
 		StringBuilder sb = new StringBuilder("");
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -137,13 +143,7 @@ public class UsuarioDAO implements OperacionesDAO {
 			sb.append(v.getCareer() + ";");
 			sb.append(v.getTime() + ";");
 			sb.append(v.getOrigin() + ";");
-			if (v instanceof AdministradorDTO) {
-				AdministradorDTO aux = (AdministradorDTO) v;
-				sb.append(formato.format(v.getRegistrationdate()) + ";");
-				sb.append(aux.getPassword() + "\n");
-			} else {
-				sb.append(formato.format(v.getRegistrationdate()) + "\n");
-			}
+			sb.append(formato.format(v.getRegistrationdate()) + "\n");
 		}
 		FileHandler.escribirArchivoDeTexto("datosEst.csv", sb.toString());
 		FileHandler.escribirSerializado("datosEst.dat", lista);
